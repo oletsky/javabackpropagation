@@ -13,8 +13,10 @@ import java.util.Arrays;
 public class SimpleNeuroTester {
     public static void main(String[] args) {
         SimpleNeuron neuron = new SimpleNeuron(
-                new SigmoidFunction()
+                new TresholdFunction()
         );
+
+        String fName="orsimpleperceptron.txt";
 
         //Training set
         double[][] trainingInputs={
@@ -28,7 +30,7 @@ public class SimpleNeuroTester {
         double[] trainingXOutputs = {0., 0., 1., 1.};
         double[] trainingXOROutputs = {0., 1., 1., 0.};
 
-        double[] trainingOutputs = trainingConjOutputs;
+        double[] trainingOutputs = trainingDisjOutputs;
 
         //Training
         final double EPS = 1.E-5;
@@ -45,6 +47,8 @@ public class SimpleNeuroTester {
             System.out.println("Neuron has been successfully trained");
         else
             System.out.println("Training was not very successful");
+        neuron.save(fName);
+        System.out.println("Configuration saved to file "+fName);
 
         //Testing
         double[][] controlSet = {

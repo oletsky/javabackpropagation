@@ -2,6 +2,9 @@ package mathcomp.oletsky.neuro;
 
 import mathcomp.oletsky.mathhelper.VectMatr;
 
+import java.io.FileNotFoundException;
+import java.io.PrintWriter;
+
 public class SimpleNeuron {
     private double[] weights;
     private ActivationFunction activFunction;
@@ -63,5 +66,18 @@ public class SimpleNeuron {
         }
         System.out.println("There were "+numbEpochs+" epochs");
         return !forcedExit;
+    }
+
+    public void save (String fName){
+        try (PrintWriter pw = new PrintWriter(fName)) {
+            pw.println(activFunction.inform());
+            for (int i=0; i<weights.length; i++) {
+                pw.printf("%10.5f",weights[i]);
+                if (i!=weights.length-1) pw.print(";");
+
+            }
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
     }
 }
