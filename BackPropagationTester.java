@@ -13,7 +13,7 @@ public class BackPropagationTester {
                 new SigmoidFunction()
 
         };
-        int[] kolNeurons = {10, 3, 1};
+        int[] kolNeurons = {5, 10, 1};
 
         //Creating network
         BackPropagationNetwork network =
@@ -53,7 +53,7 @@ public class BackPropagationTester {
         double[][] trainingOutputs = trainingXOROutputs;
 
         //Training
-        final double EPS = 1.E-10;
+        final double EPS = 1.E-12;
         final double GAMMA = 0.5;
         final int MAX_ITERS = 2000000;
 
@@ -67,13 +67,15 @@ public class BackPropagationTester {
             System.out.println("Neuron has been successfully trained");
         else
             System.out.println("Training was not very successful");
-
+        String fName="network.txt";
+        network.save(fName);
+        System.out.println("Network has been saved to file "+fName);
         //Testing
         double[][] controlSet = {
-                {0., 0.},
-                {0., 1.},
-                {1., 0.},
-                {1., 1.}
+                {0.2, 0.1},
+                {0.1, 0.9},
+                {0.8, 0.1},
+                {0.9, 0.9}
         };
 
         double[][] testResults = new double[controlSet.length][];

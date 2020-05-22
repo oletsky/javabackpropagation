@@ -1,16 +1,22 @@
 package mathcomp.oletsky.neuro;
 
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+
 public class BackPropagationNetwork {
     private int kolLayers;
     private double[][] layerOutputs;
     private double[][] layerErrors;
     private Neuron[][] neurons;
+    ActivationFunction[] activFunctions;
 
     public BackPropagationNetwork
             (int kolInputs,
              ActivationFunction[] activFunctions,
              int[] kolNeuronsOnLayer){
         //Preparing infrastructure
+        this.activFunctions=activFunctions;
         this.kolLayers=kolNeuronsOnLayer.length;
         //Creating network
         neurons = new Neuron[kolLayers][];
@@ -179,6 +185,38 @@ public class BackPropagationNetwork {
             }
 
         return s;
+    }
+
+    public void save(String fileName) {
+        try(PrintWriter pw =new PrintWriter(fileName)) {
+            pw.println(kolLayers);
+            for (int i=0; i<kolLayers; i++) {
+                int kol=neurons[i].length;
+                pw.print(kol);
+                if (i!=kolLayers-1) pw.print(";");
+            }
+            pw.println();
+            for (int i=0; i<kolLayers; i++) {
+                String func=activFunctions[i].inform();
+                pw.print(func);
+                if (i!=kolLayers-1) pw.print(";");
+            }
+            pw.println();
+            for (int i = 0; i < kolLayers; i++) {
+                for (int j=0; j<neurons[i].length; j++) {
+                    double[] w = neurons[i][j].getWeights();
+                    for (int k=0; k<w.length; k++) {
+                        pw.printf("%8.4f",w[k]);
+                        if (k!=w.length-1) pw.print(";");
+                    }
+                    pw.println();
+                }
+
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 }

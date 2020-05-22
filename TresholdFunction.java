@@ -7,4 +7,9 @@ public class TresholdFunction implements ActivationFunction {
         if (s >= 0.5) return 1.;
         else return 0.;
     }
+
+    @Override
+    public String inform() {
+        return "treshold";
+    }
 }
