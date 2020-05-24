@@ -24,6 +24,12 @@ public class Neuron {
 
     }
 
+    public Neuron(ActivationFunction activationFunction, double[] weights, int kolInputs) {
+        this.activationFunction = activationFunction;
+        this.weights = weights;
+        this.kolInputs = kolInputs;
+    }
+
     public int getInputCount() {
         return this.kolInputs;
     }
