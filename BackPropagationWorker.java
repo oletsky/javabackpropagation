@@ -4,7 +4,7 @@ import mathcomp.oletsky.mathhelper.VectMatr;
 
 public class BackPropagationWorker {
     public static void main(String[] args) {
-        final String fName="ornetwork.txt";
+        final String fName="implnetwork.txt";
         BackPropagationNetwork network = BackPropagationNetwork.load(fName);
         System.out.println("Network loaded");
         //Testing

@@ -46,7 +46,11 @@ public class BackPropagationTrainer {
                 {0.}, {1.}, {1.}, {0.}
         };
 
-        double[][] trainingOutputs = trainingDisjOutputs;
+        double[][] trainingImplOutputs = {
+                {1.}, {1.}, {0.}, {1.}
+        };
+
+        double[][] trainingOutputs = trainingImplOutputs;
 
         //Training
         final double EPS = 1.E-10;
@@ -63,7 +67,7 @@ public class BackPropagationTrainer {
             System.out.println("Network has been successfully trained");
         else
             System.out.println("Training was not very successful");
-        String fName="ornetwork.txt";
+        String fName="implnetwork.txt";
         network.save(fName);
         System.out.println("Network has been saved to file "+fName);
 
